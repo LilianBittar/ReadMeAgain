@@ -1,4 +1,4 @@
 package com.lilianbittar.readmeagain.view;
 
-public class LoginFragment {
+public class LoginFragment  {
 }
