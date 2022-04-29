@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/ReamMeAgain.iml" filepath="$PROJECT_DIR$/.idea/ReamMeAgain.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ReadMeAgain.iml" filepath="$PROJECT_DIR$/.idea/modules/ReadMeAgain.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/ReadMeAgain.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/ReadMeAgain.app.iml" />
     </modules>
   </component>
 </project>
