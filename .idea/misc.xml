@@ -3,7 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/repos/ReadMeAgain/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/repos/ReadMeAgain/app/src/main/res/layout/activity_main.xml" value="0.5" />
+        <entry key="..\:/repos/ReadMeAgain/app/src/main/res/layout/fragment_login.xml" value="0.575" />
+        <entry key="..\:/repos/ReadMeAgain/app/src/main/res/layout/navigation_drawer_header.xml" value="0.575" />
+        <entry key="..\:/repos/ReadMeAgain/app/src/main/res/menu/appbar.xml" value="0.575" />
+        <entry key="..\:/repos/ReadMeAgain/app/src/main/res/menu/bottom_nav.xml" value="0.575" />
+        <entry key="..\:/repos/ReadMeAgain/app/src/main/res/menu/nav_drawer.xml" value="0.575" />
       </map>
     </option>
   </component>
