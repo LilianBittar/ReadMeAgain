@@ -6,13 +6,15 @@ public class Book {
     private String Author;
     private String Genre;
     private String Description;
+    private int picture;
 
-    public Book(String title, long ISBN, String author, String genre, String description) {
+    public Book(String title, long ISBN, String author, String genre, String description, int picture) {
         this.title = title;
         this.ISBN = ISBN;
         Author = author;
         Genre = genre;
         Description = description;
+        this.picture = picture;
     }
 
     public String getTitle() {
@@ -53,5 +55,13 @@ public class Book {
 
     public void setDescription(String description) {
         Description = description;
+    }
+
+    public int getPicture() {
+        return picture;
+    }
+
+    public void setPicture(int picture) {
+        this.picture = picture;
     }
 }

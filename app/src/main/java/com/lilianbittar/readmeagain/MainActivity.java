@@ -8,16 +8,23 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
+import com.lilianbittar.readmeagain.model.Book;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.ArrayList;
+import java.util.List;
+
+public class MainActivity extends AppCompatActivity implements bookAdapter.OnClickListener{
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
@@ -25,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
     private NavController navController;
     private AppBarConfiguration appBarConfiguration;
+    private bookAdapter bookAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +40,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         initViews();
         setupNavigation();
+
+
+        List<Book> bookList = new ArrayList<>();
+        bookList.add(new Book("Sally",2,"Reshee","Horror","The best book ever", R.drawable.book1));
+        bookAdapter = new bookAdapter(bookList, this);
+
+
     }
 
     private void initViews() {
@@ -86,5 +101,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         return NavigationUI.onNavDestinationSelected(item, navController) || super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(int position) {
+     Toast.makeText(this, "Position: " + position, Toast.LENGTH_SHORT).show();
     }
 }

@@ -3,14 +3,17 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/repos/ReadMeAgain/app/src/main/res/drawable/frag_signin_button_login.xml" value="0.4435" />
-        <entry key="..\:/repos/ReadMeAgain/app/src/main/res/drawable/frag_signin_input.xml" value="0.4435" />
-        <entry key="..\:/repos/ReadMeAgain/app/src/main/res/font/lily_script.xml" value="0.41770833333333335" />
-        <entry key="..\:/repos/ReadMeAgain/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/repos/ReadMeAgain/app/src/main/res/layout/activity_main.xml" value="0.5" />
+        <entry key="..\:/repos/ReadMeAgain/app/src/main/res/layout/fargment_book_wishlist.xml" value="0.264" />
+        <entry key="..\:/repos/ReadMeAgain/app/src/main/res/layout/fragment_book_wishlist.xml" value="0.365625" />
         <entry key="..\:/repos/ReadMeAgain/app/src/main/res/layout/fragment_login.xml" value="0.575" />
-        <entry key="..\:/repos/ReadMeAgain/app/src/main/res/layout/fragment_signin.xml" value="0.5" />
+        <entry key="..\:/repos/ReadMeAgain/app/src/main/res/layout/fragment_settings.xml" value="0.365625" />
+        <entry key="..\:/repos/ReadMeAgain/app/src/main/res/layout/fragment_signin.xml" value="0.365625" />
+        <entry key="..\:/repos/ReadMeAgain/app/src/main/res/layout/nav_drawer_header.xml" value="0.25" />
         <entry key="..\:/repos/ReadMeAgain/app/src/main/res/layout/navigation_drawer_header.xml" value="0.575" />
+        <entry key="..\:/repos/ReadMeAgain/app/src/main/res/menu/activity_main_drawer.xml" value="0.24444444444444444" />
         <entry key="..\:/repos/ReadMeAgain/app/src/main/res/menu/appbar.xml" value="0.575" />
+        <entry key="..\:/repos/ReadMeAgain/app/src/main/res/menu/appbar_menu.xml" value="0.25" />
         <entry key="..\:/repos/ReadMeAgain/app/src/main/res/menu/bottom_nav.xml" value="0.575" />
         <entry key="..\:/repos/ReadMeAgain/app/src/main/res/menu/nav_drawer.xml" value="0.575" />
       </map>

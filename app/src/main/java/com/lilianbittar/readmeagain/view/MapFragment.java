@@ -1,4 +1,6 @@
 package com.lilianbittar.readmeagain.view;
 
-public class MapFragment {
+import androidx.fragment.app.Fragment;
+
+public class MapFragment extends Fragment {
 }
