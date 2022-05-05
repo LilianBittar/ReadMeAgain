@@ -2,12 +2,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@+id/nav_login">
+    app:startDestination="@+id/nav_signin">
 
     <fragment
-        android:id="@+id/nav_login"
-        android:name="com.lilianbittar.readmeagain.LoginFragment"
+        android:id="@+id/nav_signin"
+        android:name="com.lilianbittar.readmeagain.SigninFragment"
         android:label="Login"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/fragment_signin" />
 
 </navigation>
