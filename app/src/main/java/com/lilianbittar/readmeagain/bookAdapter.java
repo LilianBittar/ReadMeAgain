@@ -3,6 +3,7 @@ package com.lilianbittar.readmeagain;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -30,7 +31,7 @@ public class bookAdapter extends RecyclerView.Adapter<bookAdapter.ViewHolder> {
     @NonNull
     public bookAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.fargment_book_wishlist, parent, false);
+        View view = inflater.inflate(R.layout.fragment_book_items, parent, false);
         return new ViewHolder(view);
     }
 
@@ -47,9 +48,11 @@ public class bookAdapter extends RecyclerView.Adapter<bookAdapter.ViewHolder> {
 
      class ViewHolder extends RecyclerView.ViewHolder {
         TextView name;
+        ImageView image;
         public ViewHolder( View itemView) {
             super(itemView);
-
+            name = itemView.findViewById(R.id.book_title);
+            image = itemView.findViewById(R.id.book_image);
             itemView.setOnClickListener(v -> {
                 onClickListener.onClick(getAdapterPosition());
             });
