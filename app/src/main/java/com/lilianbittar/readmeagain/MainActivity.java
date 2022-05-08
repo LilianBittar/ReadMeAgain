@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements bookAdapter.OnCli
 
 
         List<Book> bookList = new ArrayList<>();
-        bookList.add(new Book("Sally",2,"Reshee","Horror","The best book ever", R.drawable.book1));
+        bookList.add(new Book("Sally",2,"Reshee","Horror","The best book ever", "abc"));
         bookAdapter = new bookAdapter(bookList, this);
 
 

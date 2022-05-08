@@ -2,7 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@+id/nav_signin">
+    app:startDestination="@+id/nav_book_search">
 
     <fragment
         android:id="@+id/nav_signin"
@@ -15,5 +15,11 @@
         android:name="com.lilianbittar.readmeagain.view.HomeFragment"
         android:label="Book List"
         tools:layout="@layout/fragment_book_wishlist"/>
+
+    <fragment
+        android:id="@+id/nav_book_search"
+        android:name="com.lilianbittar.readmeagain.view.SearchFragment"
+        android:label="Book Search"
+        tools:layout="@layout/fragment_search"/>
 
 </navigation>
