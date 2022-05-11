@@ -7,7 +7,7 @@
 
 
     <TextView
-        android:id="@+id/book_title"
+        android:id="@+id/book"
         android:layout_width="408dp"
         android:layout_height="104dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -21,23 +21,72 @@
         android:id="@+id/book_image"
         android:layout_width="69dp"
         android:layout_height="82dp"
-        app:layout_constraintBottom_toBottomOf="@+id/book_title"
-        app:layout_constraintEnd_toEndOf="@+id/book_title"
-        app:layout_constraintHorizontal_bias="0.043"
+        app:layout_constraintBottom_toBottomOf="@+id/book"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/book_title"
-        app:layout_constraintVertical_bias="0.475"
+        app:layout_constraintTop_toTopOf="@+id/book"
+        app:layout_constraintVertical_bias="0.727"
         app:srcCompat="@drawable/book1" />
 
     <TextView
-        android:id="@+id/textView3"
-        android:layout_width="219dp"
-        android:layout_height="66dp"
-        android:text="Description"
-        app:layout_constraintBottom_toBottomOf="@+id/book_title"
-        app:layout_constraintEnd_toEndOf="@+id/book_title"
-        app:layout_constraintHorizontal_bias="0.156"
+        android:id="@+id/book_info_holder"
+        android:layout_width="260dp"
+        android:layout_height="80dp"
+        app:layout_constraintBottom_toBottomOf="@+id/book"
+        app:layout_constraintEnd_toEndOf="@+id/book"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/book_image"
-        app:layout_constraintTop_toTopOf="@+id/book_title"
-        app:layout_constraintVertical_bias="0.543" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.629" />
+
+    <TextView
+        android:id="@+id/book_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Title"
+        app:layout_constraintBottom_toBottomOf="@+id/book_info_holder"
+        app:layout_constraintEnd_toEndOf="@+id/book_info_holder"
+        app:layout_constraintHorizontal_bias="0.034"
+        app:layout_constraintStart_toStartOf="@+id/book_info_holder"
+        app:layout_constraintTop_toTopOf="@+id/book_info_holder"
+        app:layout_constraintVertical_bias="0.15" />
+
+    <TextView
+        android:id="@+id/book_author"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Author"
+        app:layout_constraintBottom_toBottomOf="@+id/book_info_holder"
+        app:layout_constraintEnd_toEndOf="@+id/book_info_holder"
+        app:layout_constraintHorizontal_bias="0.018"
+        app:layout_constraintStart_toEndOf="@+id/book_image"
+        app:layout_constraintTop_toBottomOf="@+id/book_title"
+        app:layout_constraintVertical_bias="0.058" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Genre"
+        app:layout_constraintBottom_toBottomOf="@+id/book_info_holder"
+        app:layout_constraintEnd_toEndOf="@+id/book_info_holder"
+        app:layout_constraintHorizontal_bias="0.018"
+        app:layout_constraintStart_toEndOf="@+id/book_image"
+        app:layout_constraintTop_toTopOf="@+id/book_info_holder"
+        app:layout_constraintVertical_bias="0.515" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ISBN"
+        app:layout_constraintBottom_toBottomOf="@+id/book"
+        app:layout_constraintEnd_toEndOf="@+id/book"
+        app:layout_constraintHorizontal_bias="0.022"
+        app:layout_constraintStart_toEndOf="@+id/book_image"
+        app:layout_constraintTop_toTopOf="@+id/book"
+        app:layout_constraintVertical_bias="0.47" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
