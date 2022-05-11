@@ -2,19 +2,29 @@ package com.lilianbittar.readmeagain.model;
 
 public class Book {
     private String Title;
-    private long ISBN;
+    private String ISBN;
     private String Author;
     private String Genre;
     private String Description;
     private String Picture;
+    private String Rating;
 
-    public Book(String Title, long ISBN, String author, String genre, String description, String Picture) {
+    public Book(String Title, String ISBN, String author, String genre, String description, String Picture, String Rating) {
         this.Title = Title;
         this.ISBN = ISBN;
         Author = author;
         Genre = genre;
         Description = description;
         this.Picture = Picture;
+        this.Rating = Rating;
+    }
+
+    public String getRating() {
+        return Rating;
+    }
+
+    public void setRating(String rating) {
+        Rating = rating;
     }
 
     public String getTitle() {
@@ -25,11 +35,11 @@ public class Book {
         this.Title = title;
     }
 
-    public long getISBN() {
+    public String getISBN() {
         return ISBN;
     }
 
-    public void setISBN(long ISBN) {
+    public void setISBN(String ISBN) {
         this.ISBN = ISBN;
     }
 

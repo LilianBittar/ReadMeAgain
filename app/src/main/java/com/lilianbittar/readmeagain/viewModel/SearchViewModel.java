@@ -14,7 +14,7 @@ public class SearchViewModel extends ViewModel {
         repo = BookRepo.getInstance();
     }
 
-    LiveData<Book> getSearchedBook(){
+    public LiveData<Book> getSearchedBook(){
         return repo.getSearchedBook();
     }
 

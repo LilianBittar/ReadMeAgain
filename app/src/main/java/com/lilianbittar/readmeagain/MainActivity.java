@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.lilianbittar.readmeagain.model.Book;
+import com.lilianbittar.readmeagain.model.BookAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +33,8 @@ public class MainActivity extends AppCompatActivity implements bookAdapter.OnCli
     private BottomNavigationView bottomNavigationView;
     private NavController navController;
     private AppBarConfiguration appBarConfiguration;
-    private bookAdapter bookAdapter;
+    private BookAdapter bookAdapter;
+    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,10 +43,14 @@ public class MainActivity extends AppCompatActivity implements bookAdapter.OnCli
         initViews();
         setupNavigation();
 
-
+        recyclerView = findViewById(R.id.rv_search);
+        recyclerView.hasFixedSize();
+        // Retrieve the Recycle View from fragment_search and attach a Layout Manager to it
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         List<Book> bookList = new ArrayList<>();
-        bookList.add(new Book("Sally",2,"Reshee","Horror","The best book ever", "abc"));
-        bookAdapter = new bookAdapter(bookList, this);
+//        bookList.add(new Book("Sally",2,"Reshee","Horror","The best book ever", "abc"));
+        bookAdapter = new BookAdapter(bookList);
+
 
 
     }
