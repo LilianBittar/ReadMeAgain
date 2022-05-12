@@ -1,31 +1,25 @@
-package com.lilianbittar.readmeagain;
+package com.lilianbittar.readmeagain.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
-
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.lilianbittar.readmeagain.model.Book;
 import com.lilianbittar.readmeagain.model.BookAdapter;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class MainActivity extends AppCompatActivity implements bookAdapter.OnClickListener{
+public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
@@ -39,6 +33,8 @@ public class MainActivity extends AppCompatActivity implements bookAdapter.OnCli
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        checkIfSignedIn();
+
         setContentView(R.layout.activity_main);
         initViews();
         setupNavigation();
@@ -80,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements bookAdapter.OnCli
     private void setBottomNavigationVisibility() {
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
             final int id = destination.getId();
-                bottomNavigationView.setVisibility(View.GONE);
+            bottomNavigationView.setVisibility(View.GONE);
         });
     }
 
@@ -109,8 +105,22 @@ public class MainActivity extends AppCompatActivity implements bookAdapter.OnCli
         return NavigationUI.onNavDestinationSelected(item, navController) || super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onClick(int position) {
-     Toast.makeText(this, "Position: " + position, Toast.LENGTH_SHORT).show();
+
+//    private void checkIfSignedIn() {
+//        viewModel.getCurrentUser().observe(this, user -> {
+//            if (user != null) {
+//                String message = "Welcome " + user.getDisplayName();
+//            } else
+//                startLoginActivity();
+//        });
+//    }
+
+    private void startLoginActivity() {
+        startActivity(new Intent(this, SignInActivity.class));
+        finish();
     }
+
+//    public void signOut(View v) {
+//        viewModel.signOut();
+//    }
 }

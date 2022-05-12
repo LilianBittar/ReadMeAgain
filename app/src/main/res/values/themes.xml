@@ -26,4 +26,10 @@
     <style name="Button" parent="ThemeOverlay.AppCompat">
         <item name="colorAccent">#0494d0</item>
     </style>
+    <style name="Theme.ReadMeAgain.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="Theme.ReadMeAgain.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Theme.ReadMeAgain.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

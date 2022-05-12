@@ -2,13 +2,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@+id/nav_book_search">
+    app:startDestination="@+id/nav_main">
 
     <fragment
-        android:id="@+id/nav_signin"
-        android:name="com.lilianbittar.readmeagain.SigninFragment"
-        android:label="Login"
-        tools:layout="@layout/fragment_signin" />
+        android:id="@+id/nav_main"
+        android:name="com.lilianbittar.readmeagain.fragments.MainFragment"
+        android:label="Main"
+        tools:layout="@layout/fragment_main" >
+    </fragment>
 
     <fragment
         android:id="@+id/nav_book_wishlist"
