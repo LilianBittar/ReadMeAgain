@@ -9,5 +9,5 @@ import retrofit2.http.Query;
 public interface BookApi {
 
     @GET("search.json")
-    Call<SearchBookByTitleResponse> getBookByTitle(@Query("q") String BookTitle);
+    Call<SearchBookByTitleResponse> getBookByTitle(@Query("q") String BookTitle, @Query("limit") int limit);
 }

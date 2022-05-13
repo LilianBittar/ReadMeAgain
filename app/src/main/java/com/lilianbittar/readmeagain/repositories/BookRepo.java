@@ -35,7 +35,7 @@ public class BookRepo {
 
     public void searchForBook(CallbackLoading callback, String bookName){
         BookApi searchApi = ServiceGenerator.getBookApi();
-        Call<SearchBookByTitleResponse> call = searchApi.getBookByTitle(bookName);
+        Call<SearchBookByTitleResponse> call = searchApi.getBookByTitle(bookName, 25);
         call.enqueue(new Callback<SearchBookByTitleResponse>() {
             @Override
             public void onResponse(Call<SearchBookByTitleResponse> call, Response<SearchBookByTitleResponse> response) {
