@@ -1,5 +1,6 @@
 package com.lilianbittar.readmeagain.activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -9,24 +10,18 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.lilianbittar.readmeagain.R;
-import com.lilianbittar.readmeagain.model.Book;
-import com.lilianbittar.readmeagain.model.BookAdapter;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.lilianbittar.readmeagain.viewmodels.MainViewModel;
 
 public class MainActivity extends AppCompatActivity {
+
+    private MainViewModel viewModel;
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
@@ -34,57 +29,39 @@ public class MainActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
     private NavController navController;
     private AppBarConfiguration appBarConfiguration;
-    private BookAdapter bookAdapter;
-    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        checkIfSignedIn();
+        viewModel = new ViewModelProvider(this).get(MainViewModel.class);
+        checkIfSignedIn();
 
         setContentView(R.layout.activity_main);
         initViews();
         setupNavigation();
-
-        recyclerView = findViewById(R.id.rv_search);
-        recyclerView.hasFixedSize();
-        // Retrieve the Recycle View from fragment_search and attach a Layout Manager to it
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        List<Book> bookList = new ArrayList<>();
-//        bookList.add(new Book("Sally",2,"Reshee","Horror","The best book ever", "abc"));
-        bookAdapter = new BookAdapter(bookList);
-
-
-
     }
 
     private void initViews() {
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
         toolbar = findViewById(R.id.toolbar);
-        bottomNavigationView = findViewById(R.id.bottom_nav_view);
+        bottomNavigationView = findViewById(R.id.bottom_navigation_view);
     }
 
     private void setupNavigation() {
-        navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         setSupportActionBar(toolbar);
 
-        appBarConfiguration = new AppBarConfiguration.Builder()
+        appBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.nav_search,
+                R.id.nav_map,
+                R.id.nav_profile)
                 .setOpenableLayout(drawerLayout)
                 .build();
 
+        navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(bottomNavigationView, navController);
         NavigationUI.setupWithNavController(navigationView, navController);
-        setBottomNavigationVisibility();
-    }
-
-
-    private void setBottomNavigationVisibility() {
-        navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
-            final int id = destination.getId();
-            bottomNavigationView.setVisibility(View.GONE);
-        });
     }
 
     @Override
@@ -108,26 +85,30 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        return NavigationUI.onNavDestinationSelected(item, navController) || super.onOptionsItemSelected(item);
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int itemId = item.getItemId();
+
+        if (itemId == R.id.appbar_logout) {
+            signOut();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
-
-//    private void checkIfSignedIn() {
-//        viewModel.getCurrentUser().observe(this, user -> {
-//            if (user != null) {
-//                String message = "Welcome " + user.getDisplayName();
-//            } else
-//                startLoginActivity();
-//        });
-//    }
+    private void checkIfSignedIn() {
+        viewModel.getCurrentUser().observe(this, user -> {
+            if (user != null) {
+                String message = "Welcome " + user.getDisplayName();
+            } else
+                startLoginActivity();
+        });
+    }
 
     private void startLoginActivity() {
         startActivity(new Intent(this, SignInActivity.class));
         finish();
     }
 
-//    public void signOut(View v) {
-//        viewModel.signOut();
-//    }
+    public void signOut() {
+        viewModel.signOut();
+    }
 }

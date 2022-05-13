@@ -1,18 +1,13 @@
 package com.lilianbittar.readmeagain.repositories;
 
 import android.util.Log;
-
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-
-import com.lilianbittar.readmeagain.Network.SearchApi;
-import com.lilianbittar.readmeagain.Network.ServiceGenerator;
 import com.lilianbittar.readmeagain.model.Book;
-import com.lilianbittar.readmeagain.response.BookValue;
-import com.lilianbittar.readmeagain.response.SearchBookByTitleResponse;
-
+import com.lilianbittar.readmeagain.network.BookApi;
+import com.lilianbittar.readmeagain.network.ServiceGenerator;
+import com.lilianbittar.readmeagain.network.responses.SearchBookByTitleResponse;
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -20,27 +15,25 @@ import retrofit2.Response;
 public class BookRepo {
 
     private static BookRepo instance;
-    //here we going to subscribe to the data that is retrieved
-    private final MutableLiveData<List<BookValue>> searchedBook;
+    private final MutableLiveData<List<Book>> searchedBook;
 
-    private BookRepo(){
+    private BookRepo() {
         searchedBook = new MutableLiveData<>();
     }
 
-
-    public static synchronized BookRepo getInstance(){
-        if (instance == null){
+    public static synchronized BookRepo getInstance() {
+        if (instance == null) {
             instance = new BookRepo();
         }
         return instance;
     }
 
-    public LiveData<List<BookValue>> getSearchedBook(){
+    public LiveData<List<Book>> getSearchedBook() {
         return searchedBook;
     }
 
     public void searchForBook(String bookName){
-        SearchApi searchApi = ServiceGenerator.getSearchApi();
+        BookApi searchApi = ServiceGenerator.getBookApi();
         Call<SearchBookByTitleResponse> call = searchApi.getBookByTitle(bookName);
         call.enqueue(new Callback<SearchBookByTitleResponse>() {
             @Override

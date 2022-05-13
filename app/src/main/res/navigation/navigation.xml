@@ -8,19 +8,24 @@
         android:id="@+id/nav_main"
         android:name="com.lilianbittar.readmeagain.fragments.MainFragment"
         android:label="Main"
-        tools:layout="@layout/fragment_main" >
-    </fragment>
+        tools:layout="@layout/fragment_main" />
 
     <fragment
-        android:id="@+id/nav_book_wishlist"
-        android:name="com.lilianbittar.readmeagain.view.HomeFragment"
-        android:label="Book List"
-        tools:layout="@layout/fragment_book_wishlist"/>
-
-    <fragment
-        android:id="@+id/nav_book_search"
-        android:name="com.lilianbittar.readmeagain.view.SearchFragment"
+        android:id="@+id/nav_search"
+        android:name="com.lilianbittar.readmeagain.fragments.SearchFragment"
         android:label="Book Search"
         tools:layout="@layout/fragment_search"/>
+
+    <fragment
+        android:id="@+id/nav_map"
+        android:name="com.lilianbittar.readmeagain.fragments.MapFragment"
+        android:label="Map Search"
+        tools:layout="@layout/fragment_map"/>
+
+    <fragment
+        android:id="@+id/nav_profile"
+        android:name="com.lilianbittar.readmeagain.fragments.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile"/>
 
 </navigation>

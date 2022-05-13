@@ -1,4 +1,4 @@
-package com.lilianbittar.readmeagain.model;
+package com.lilianbittar.readmeagain.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,9 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.google.android.material.textfield.TextInputLayout;
 import com.lilianbittar.readmeagain.R;
-import com.lilianbittar.readmeagain.bookAdapter;
+import com.lilianbittar.readmeagain.model.Book;
 
 import java.util.List;
 
@@ -25,6 +24,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHandler> {
     public BookAdapter(List<Book> books){
         this.books = books;
     }
+
     @NonNull
     @Override
     public ViewHandler onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -35,19 +35,23 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHandler> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHandler holder, int position) {
-        Glide.with(holder.context).load(books.get(position).getPicture()).into(holder.imageView);
+        String coverId = books.get(position).getCoverId();
+        if (coverId.isEmpty()) {
+            coverId = "https://user-images.githubusercontent.com/24848110/33519396-7e56363c-d79d-11e7-969b-09782f5ccbab.png";
+        } else {
+            coverId = "https://covers.openlibrary.org/b/id/" + coverId + ".jpg";
+        }
+        Glide.with(holder.context).load(coverId).into(holder.imageView);
         holder.bookTitle.setText(books.get(position).getTitle());
-        holder.bookAuthor.setText(books.get(position).getAuthor());
-        holder.bookGenre.setText(books.get(position).getGenre());
-        holder.bookISBN.setText(books.get(position).getISBN());
-        holder.bookDescription.setText(books.get(position).getDescription());
-        holder.bookDescription.setText(books.get(position).getDescription());
-
+        holder.bookAuthor.setText(books.get(position).getAuthor().get(0));
+        holder.bookGenre.setText(books.get(position).getSubjects().get(0));
+        holder.bookISBN.setText(books.get(position).getIsbns().get(0));
+        holder.bookDescription.setText("sally");
     }
 
     @Override
     public int getItemCount() {
-        if (books != null){
+        if (books != null) {
             return books.size();
         }
         return 0;
@@ -58,6 +62,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHandler> {
     }
 
     public class ViewHandler extends RecyclerView.ViewHolder {
+
         private final ImageView imageView;
         private TextView bookTitle;
         private TextView bookAuthor;

@@ -1,29 +1,34 @@
 package com.lilianbittar.readmeagain.model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
+
 public class Book {
+    @SerializedName("title")
+    @Expose
     private String title;
-    private String isbn;
-    private String author_name;
-    private String subject;
-    private String picture;
-    private String Rating;
 
-    public Book(String title, String isbn, String author_name, String subject,  String picture, String Rating) {
-        this.title = title;
-        this.isbn = isbn;
-        this.author_name = author_name;
-        this.subject = subject;
-        this.picture = picture;
-        this.Rating = Rating;
-    }
+    @SerializedName("number_of_pages_median")
+    @Expose
+    private Long number_of_pages_median;
 
-    public String getRating() {
-        return Rating;
-    }
+    @SerializedName("isbn")
+    @Expose
+    private List<String> isbns;
 
-    public void setRating(String rating) {
-        Rating = rating;
-    }
+    @SerializedName("author_name")
+    @Expose
+    private List<String> author;
+
+    @SerializedName("subject")
+    @Expose
+    private List<String> subjects;
+
+    @SerializedName("cover_i")
+    @Expose
+    private String coverId = "";
 
     public String getTitle() {
         return title;
@@ -33,35 +38,43 @@ public class Book {
         this.title = title;
     }
 
-    public String getISBN() {
-        return isbn;
+    public Long getNumber_of_pages_median() {
+        return number_of_pages_median;
     }
 
-    public void setISBN(String ISBN) {
-        this.isbn = ISBN;
+    public void setNumber_of_pages_median(Long number_of_pages_median) {
+        this.number_of_pages_median = number_of_pages_median;
     }
 
-    public String getAuthor() {
-        return author_name;
+    public List<String> getIsbns() {
+        return isbns;
     }
 
-    public void setAuthor(String author) {
-        author_name = author;
+    public void setIsbns(List<String> isbns) {
+        this.isbns = isbns;
     }
 
-    public String getSubject() {
-        return subject;
+    public List<String> getAuthor() {
+        return author;
     }
 
-    public void setSubject(String genre) {
-        subject = genre;
+    public void setAuthor(List<String> author) {
+        this.author = author;
     }
 
-    public String getPicture() {
-        return picture;
+    public List<String> getSubjects() {
+        return subjects;
     }
 
-    public void setPicture(String picture) {
-        this.picture = picture;
+    public void setSubjects(List<String> subjects) {
+        this.subjects = subjects;
+    }
+
+    public String getCoverId() {
+        return coverId;
+    }
+
+    public void setCoverId(String coverId) {
+        this.coverId = coverId;
     }
 }
