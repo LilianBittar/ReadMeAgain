@@ -1,6 +1,7 @@
 package com.lilianbittar.readmeagain.fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,15 +44,20 @@ public class SearchFragment extends Fragment {
         recyclerView.hasFixedSize();
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
-        ArrayList<Book> books = new ArrayList<Book>();
+        ArrayList<Book> books = new ArrayList<>();
+
+
+        bookAdapter = new BookAdapter(books);
+        recyclerView.setAdapter(bookAdapter);
+
+
 
         viewModel.getSearchedBook().observe(this.getViewLifecycleOwner(), searchedBooks -> {
             books.clear();
             books.addAll(searchedBooks);
+            recyclerView.setAdapter(bookAdapter);
         });
 
-        bookAdapter = new BookAdapter(books);
-        recyclerView.setAdapter(bookAdapter);
 
         searchButton.setOnClickListener(v -> {
             viewModel.searchForBook(searchInput.getEditText().getText().toString());

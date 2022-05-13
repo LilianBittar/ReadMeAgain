@@ -43,9 +43,25 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHandler> {
         }
         Glide.with(holder.context).load(coverId).into(holder.imageView);
         holder.bookTitle.setText(books.get(position).getTitle());
-        holder.bookAuthor.setText(books.get(position).getAuthor().get(0));
-        holder.bookGenre.setText(books.get(position).getSubjects().get(0));
-        holder.bookISBN.setText(books.get(position).getIsbns().get(0));
+
+        String author = "Not found";
+        if (books.get(position).getAuthor() != null) {
+            author = books.get(position).getAuthor().get(0);
+        }
+        holder.bookAuthor.setText(author);
+
+        String subject = "Not found";
+        if (books.get(position).getSubjects() != null) {
+            subject = books.get(position).getSubjects().get(0);
+        }
+        holder.bookGenre.setText(subject);
+
+        String isbn = "Not found";
+        if (books.get(position).getIsbns() != null) {
+            isbn = books.get(position).getIsbns().get(0);
+        }
+        holder.bookISBN.setText(isbn);
+
         holder.bookDescription.setText("sally");
     }
 
