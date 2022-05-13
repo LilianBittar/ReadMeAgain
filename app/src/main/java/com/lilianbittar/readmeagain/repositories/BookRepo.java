@@ -1,4 +1,4 @@
-package com.lilianbittar.readmeagain.repo;
+package com.lilianbittar.readmeagain.repositories;
 
 import android.util.Log;
 
@@ -8,18 +8,20 @@ import androidx.lifecycle.MutableLiveData;
 import com.lilianbittar.readmeagain.Network.SearchApi;
 import com.lilianbittar.readmeagain.Network.ServiceGenerator;
 import com.lilianbittar.readmeagain.model.Book;
-import com.lilianbittar.readmeagain.response.SearchResponse;
+import com.lilianbittar.readmeagain.response.BookValue;
+import com.lilianbittar.readmeagain.response.SearchBookByTitleResponse;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.internal.EverythingIsNonNull;
 
 public class BookRepo {
 
     private static BookRepo instance;
     //here we going to subscribe to the data that is retrieved
-    private final MutableLiveData<Book> searchedBook;
+    private final MutableLiveData<List<BookValue>> searchedBook;
 
     private BookRepo(){
         searchedBook = new MutableLiveData<>();
@@ -33,24 +35,23 @@ public class BookRepo {
         return instance;
     }
 
-    public LiveData<Book> getSearchedBook(){
+    public LiveData<List<BookValue>> getSearchedBook(){
         return searchedBook;
     }
 
     public void searchForBook(String bookName){
         SearchApi searchApi = ServiceGenerator.getSearchApi();
-        Call<SearchResponse> call = searchApi.getBook(bookName);
-        call.enqueue(new Callback<SearchResponse>() {
-            @EverythingIsNonNull
+        Call<SearchBookByTitleResponse> call = searchApi.getBookByTitle(bookName);
+        call.enqueue(new Callback<SearchBookByTitleResponse>() {
             @Override
-            public void onResponse(Call<SearchResponse> call, Response<SearchResponse> response) {
+            public void onResponse(Call<SearchBookByTitleResponse> call, Response<SearchBookByTitleResponse> response) {
                 if (response.isSuccessful()) {
-                    searchedBook.setValue(response.body().getBook());
+                    searchedBook.setValue(response.body().getBooks());
                 }
             }
-            @EverythingIsNonNull
+
             @Override
-            public void onFailure(Call<SearchResponse> call, Throwable t) {
+            public void onFailure(Call<SearchBookByTitleResponse> call, Throwable t) {
                 Log.i("Retrofit", "Something went wrong: (");
             }
         });

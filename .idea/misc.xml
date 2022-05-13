@@ -4,6 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/repos/ReadMeAgain/app/src/main/res/layout/activity_main.xml" value="0.5" />
+        <entry key="..\:/repos/ReadMeAgain/app/src/main/res/layout/activity_sign_in.xml" value="0.4125" />
+        <entry key="..\:/repos/ReadMeAgain/app/src/main/res/layout/activity_sign_up.xml" value="0.4125" />
         <entry key="..\:/repos/ReadMeAgain/app/src/main/res/layout/fargment_book_wishlist.xml" value="0.264" />
         <entry key="..\:/repos/ReadMeAgain/app/src/main/res/layout/fragment_book_items.xml" value="0.4" />
         <entry key="..\:/repos/ReadMeAgain/app/src/main/res/layout/fragment_book_wishlist.xml" value="0.365625" />

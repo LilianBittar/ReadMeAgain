@@ -1,6 +1,6 @@
 package com.lilianbittar.readmeagain.model;
 
-public class Profile {
+public class  Profile {
     private String FirstName;
     private String LastName;
     private int age;

@@ -5,15 +5,16 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ServiceGenerator {
 
-    private static SearchApi searchApi;
+    public static Retrofit.Builder retrofitBuilder = new Retrofit.Builder().baseUrl("http://openlibrary.org/").
+            addConverterFactory(GsonConverterFactory.create());
 
-    // Method for accessing the search API
+        private static Retrofit retrofit = retrofitBuilder.build();
+
+    private static SearchApi searchApi = retrofit.create(SearchApi.class);
+
     public static SearchApi getSearchApi(){
-        if (searchApi == null){
-            searchApi = new Retrofit.Builder().baseUrl("http://openlibrary.org/").addConverterFactory(GsonConverterFactory.create())
-                    .build().create(SearchApi.class);
-        }
         return searchApi;
     }
+
 
 }

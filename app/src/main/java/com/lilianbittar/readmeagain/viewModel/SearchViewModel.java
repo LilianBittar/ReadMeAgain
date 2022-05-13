@@ -4,7 +4,10 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.lilianbittar.readmeagain.model.Book;
-import com.lilianbittar.readmeagain.repo.BookRepo;
+import com.lilianbittar.readmeagain.repositories.BookRepo;
+import com.lilianbittar.readmeagain.response.BookValue;
+
+import java.util.List;
 
 public class SearchViewModel extends ViewModel {
 
@@ -14,7 +17,7 @@ public class SearchViewModel extends ViewModel {
         repo = BookRepo.getInstance();
     }
 
-    public LiveData<Book> getSearchedBook(){
+    public LiveData<List<BookValue>> getSearchedBook(){
         return repo.getSearchedBook();
     }
 

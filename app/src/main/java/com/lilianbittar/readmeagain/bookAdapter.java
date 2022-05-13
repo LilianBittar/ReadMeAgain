@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.lilianbittar.readmeagain.model.Book;
+import com.lilianbittar.readmeagain.model.BookAdapter;
 
 import java.util.List;
 
@@ -49,7 +50,7 @@ public class bookAdapter extends RecyclerView.Adapter<bookAdapter.ViewHolder> {
      class ViewHolder extends RecyclerView.ViewHolder {
         TextView name;
         ImageView image;
-        public ViewHolder( View itemView) {
+        public ViewHolder(View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.book_title);
             image = itemView.findViewById(R.id.book_image);

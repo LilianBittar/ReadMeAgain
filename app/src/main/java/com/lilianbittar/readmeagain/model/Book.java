@@ -1,21 +1,19 @@
 package com.lilianbittar.readmeagain.model;
 
 public class Book {
-    private String Title;
-    private String ISBN;
-    private String Author;
-    private String Genre;
-    private String Description;
-    private String Picture;
+    private String title;
+    private String isbn;
+    private String author_name;
+    private String subject;
+    private String picture;
     private String Rating;
 
-    public Book(String Title, String ISBN, String author, String genre, String description, String Picture, String Rating) {
-        this.Title = Title;
-        this.ISBN = ISBN;
-        Author = author;
-        Genre = genre;
-        Description = description;
-        this.Picture = Picture;
+    public Book(String title, String isbn, String author_name, String subject,  String picture, String Rating) {
+        this.title = title;
+        this.isbn = isbn;
+        this.author_name = author_name;
+        this.subject = subject;
+        this.picture = picture;
         this.Rating = Rating;
     }
 
@@ -28,50 +26,42 @@ public class Book {
     }
 
     public String getTitle() {
-        return Title;
+        return title;
     }
 
     public void setTitle(String title) {
-        this.Title = title;
+        this.title = title;
     }
 
     public String getISBN() {
-        return ISBN;
+        return isbn;
     }
 
     public void setISBN(String ISBN) {
-        this.ISBN = ISBN;
+        this.isbn = ISBN;
     }
 
     public String getAuthor() {
-        return Author;
+        return author_name;
     }
 
     public void setAuthor(String author) {
-        Author = author;
+        author_name = author;
     }
 
-    public String getGenre() {
-        return Genre;
+    public String getSubject() {
+        return subject;
     }
 
-    public void setGenre(String genre) {
-        Genre = genre;
-    }
-
-    public String getDescription() {
-        return Description;
-    }
-
-    public void setDescription(String description) {
-        Description = description;
+    public void setSubject(String genre) {
+        subject = genre;
     }
 
     public String getPicture() {
-        return Picture;
+        return picture;
     }
 
     public void setPicture(String picture) {
-        this.Picture = picture;
+        this.picture = picture;
     }
 }
