@@ -59,24 +59,5 @@
         app:layout_constraintTop_toBottomOf="@+id/book_genre"
         app:layout_constraintVertical_bias="0.0"/>
 
-    <TextView
-        android:id="@+id/book_description"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Description"
-        android:layout_marginStart="105dp"
-        app:layout_constraintStart_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/book_isbn"
-        app:layout_constraintVertical_bias="0.0"/>
-
-    <TextView
-        android:id="@+id/book_rating"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Rating: "
-        android:layout_marginStart="105dp"
-        app:layout_constraintStart_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/book_description"
-        app:layout_constraintVertical_bias="0.0"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

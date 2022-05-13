@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import com.lilianbittar.readmeagain.model.Book;
 import com.lilianbittar.readmeagain.network.BookApi;
+import com.lilianbittar.readmeagain.network.CallbackLoading;
 import com.lilianbittar.readmeagain.network.ServiceGenerator;
 import com.lilianbittar.readmeagain.network.responses.SearchBookByTitleResponse;
 import java.util.List;
@@ -32,7 +33,7 @@ public class BookRepo {
         return searchedBook;
     }
 
-    public void searchForBook(String bookName){
+    public void searchForBook(CallbackLoading callback, String bookName){
         BookApi searchApi = ServiceGenerator.getBookApi();
         Call<SearchBookByTitleResponse> call = searchApi.getBookByTitle(bookName);
         call.enqueue(new Callback<SearchBookByTitleResponse>() {
@@ -41,12 +42,15 @@ public class BookRepo {
                 if (response.isSuccessful()) {
                     searchedBook.setValue(response.body().getBooks());
                 }
+                callback.call();
             }
 
             @Override
             public void onFailure(Call<SearchBookByTitleResponse> call, Throwable t) {
                 Log.i("Retrofit", "Something went wrong: (");
+                callback.call();
             }
         });
+
     }
 }

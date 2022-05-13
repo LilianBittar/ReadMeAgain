@@ -62,7 +62,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHandler> {
         }
         holder.bookISBN.setText(isbn);
 
-        holder.bookDescription.setText("sally");
+
     }
 
     @Override
@@ -84,8 +84,6 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHandler> {
         private TextView bookAuthor;
         private TextView bookGenre;
         private TextView bookISBN;
-        private TextView bookDescription;
-        private TextView bookRating;
         private Context context;
 
         public ViewHandler(@NonNull View itemView) {
@@ -96,12 +94,8 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHandler> {
             bookAuthor = itemView.findViewById(R.id.book_author);
             bookGenre = itemView.findViewById(R.id.book_genre);
             bookISBN = itemView.findViewById(R.id.book_isbn);
-            bookDescription = itemView.findViewById(R.id.book_description);
-            bookRating = itemView.findViewById(R.id.book_rating);
 
-//            itemView.setOnClickListener(view -> {
-//                listener.onClick(books.get(getBindingAdapterPosition()));
-//            });
+
         }
     }
 
