@@ -8,6 +8,8 @@ import com.lilianbittar.readmeagain.network.BookApi;
 import com.lilianbittar.readmeagain.network.CallbackLoading;
 import com.lilianbittar.readmeagain.network.ServiceGenerator;
 import com.lilianbittar.readmeagain.network.responses.SearchBookByTitleResponse;
+
+import java.util.ArrayList;
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -16,11 +18,8 @@ import retrofit2.Response;
 public class BookRepo {
 
     private static BookRepo instance;
-    private final MutableLiveData<List<Book>> searchedBook;
 
-    private BookRepo() {
-        searchedBook = new MutableLiveData<>();
-    }
+    private BookRepo() {}
 
     public static synchronized BookRepo getInstance() {
         if (instance == null) {
@@ -29,26 +28,23 @@ public class BookRepo {
         return instance;
     }
 
-    public LiveData<List<Book>> getSearchedBook() {
-        return searchedBook;
-    }
-
-    public void searchForBook(CallbackLoading callback, String bookName){
+    public void searchForBook(String bookName, CallbackLoading callback){
         BookApi searchApi = ServiceGenerator.getBookApi();
         Call<SearchBookByTitleResponse> call = searchApi.getBookByTitle(bookName, 25);
         call.enqueue(new Callback<SearchBookByTitleResponse>() {
             @Override
             public void onResponse(Call<SearchBookByTitleResponse> call, Response<SearchBookByTitleResponse> response) {
+                List<Book> searchResult = new ArrayList<>();
                 if (response.isSuccessful()) {
-                    searchedBook.setValue(response.body().getBooks());
+                    searchResult = response.body().getBooks();
                 }
-                callback.call();
+                callback.call(searchResult);
             }
 
             @Override
             public void onFailure(Call<SearchBookByTitleResponse> call, Throwable t) {
                 Log.i("Retrofit", "Something went wrong: (");
-                callback.call();
+                callback.call(new ArrayList<>());
             }
         });
 

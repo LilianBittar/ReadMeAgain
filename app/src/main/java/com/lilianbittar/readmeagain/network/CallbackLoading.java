@@ -1,6 +1,8 @@
 package com.lilianbittar.readmeagain.network;
 
-public interface CallbackLoading {
+import com.lilianbittar.readmeagain.model.Book;
+import java.util.List;
 
-    void call();
+public interface CallbackLoading {
+    void call(List<Book> searchResult);
 }

@@ -6,14 +6,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.bumptech.glide.Glide;
 import com.lilianbittar.readmeagain.R;
 import com.lilianbittar.readmeagain.model.Book;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHandler> {
@@ -21,8 +20,8 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHandler> {
     private List<Book> books;
     private OnClickListener listener;
 
-    public BookAdapter(List<Book> books){
-        this.books = books;
+    public BookAdapter() {
+        this.books = new ArrayList<>();
     }
 
     @NonNull
@@ -61,16 +60,23 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHandler> {
             isbn = books.get(position).getIsbns().get(0);
         }
         holder.bookISBN.setText(isbn);
-
-
     }
 
     @Override
     public int getItemCount() {
-        if (books != null) {
+        if (books != null)
             return books.size();
-        }
         return 0;
+    }
+
+    public void updateBookList(final List<Book> bookList) {
+        clearBookList();
+        this.books = bookList;
+        notifyDataSetChanged();
+    }
+
+    public void clearBookList() {
+        this.books.clear();
     }
 
     public void setListener(OnClickListener listener){
@@ -94,13 +100,10 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHandler> {
             bookAuthor = itemView.findViewById(R.id.book_author);
             bookGenre = itemView.findViewById(R.id.book_genre);
             bookISBN = itemView.findViewById(R.id.book_isbn);
-
-
         }
     }
 
-    public interface OnClickListener
-    {
+    public interface OnClickListener {
         void onClick(Book book);
     }
 }

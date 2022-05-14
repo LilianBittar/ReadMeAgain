@@ -41,18 +41,18 @@ public class SearchFragment extends Fragment {
         root = inflater.inflate(R.layout.fragment_search, container, false);
 
         viewModel = new ViewModelProvider(this).get(SearchViewModel.class);
-
         initViews();
 
         recyclerView = root.findViewById(R.id.rv_search);
         recyclerView.hasFixedSize();
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
-        ArrayList<Book> books = new ArrayList<>();
-        bookAdapter = new BookAdapter(books);
+
+        bookAdapter = new BookAdapter();
         recyclerView.setAdapter(bookAdapter);
-        viewModel.getSearchedBook().observe(this.getViewLifecycleOwner(), booksResult -> {
-            books.clear();
-            books.addAll(booksResult);
+
+        viewModel.getSearchResult().observe(this.getViewLifecycleOwner(), booksResult -> {
+            bookAdapter.clearBookList();
+            bookAdapter.updateBookList(booksResult);
         });
 
         searchButton.setOnClickListener(v -> {
