@@ -1,14 +1,9 @@
-<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@+id/nav_main">
-
-    <fragment
-        android:id="@+id/nav_main"
-        android:name="com.lilianbittar.readmeagain.fragments.MainFragment"
-        android:label="Main"
-        tools:layout="@layout/fragment_main" />
+    app:startDestination="@+id/nav_search">
 
     <fragment
         android:id="@+id/nav_search"
@@ -17,10 +12,10 @@
         tools:layout="@layout/fragment_search"/>
 
     <fragment
-        android:id="@+id/nav_map"
-        android:name="com.lilianbittar.readmeagain.fragments.MapFragment"
-        android:label="Map Search"
-        tools:layout="@layout/fragment_map"/>
+        android:id="@+id/nav_exchange"
+        android:name="com.lilianbittar.readmeagain.fragments.ExchangeFragment"
+        android:label="Exchange"
+        tools:layout="@layout/fragment_exchange"/>
 
     <fragment
         android:id="@+id/nav_profile"
