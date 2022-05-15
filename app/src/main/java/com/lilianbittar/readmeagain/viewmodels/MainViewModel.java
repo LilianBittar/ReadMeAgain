@@ -10,12 +10,12 @@ public class MainViewModel extends AndroidViewModel {
 
     private final UserRepository userRepository;
 
-    public MainViewModel(Application app){
+    public MainViewModel(Application app) {
         super(app);
         userRepository = UserRepository.getInstance(app);
     }
 
-    public LiveData<FirebaseUser> getCurrentUser(){
+    public LiveData<FirebaseUser> getCurrentUser() {
         return userRepository.getCurrentUser();
     }
 

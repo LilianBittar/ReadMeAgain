@@ -1,7 +1,7 @@
 package com.lilianbittar.readmeagain.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,12 +17,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.textfield.TextInputLayout;
 import com.lilianbittar.readmeagain.R;
+import com.lilianbittar.readmeagain.activities.SignInActivity;
 import com.lilianbittar.readmeagain.adapters.BookAdapter;
-import com.lilianbittar.readmeagain.model.Book;
 import com.lilianbittar.readmeagain.viewmodels.SearchViewModel;
-import com.lilianbittar.readmeagain.viewmodels.MainViewModel;
-
-import java.util.ArrayList;
 
 public class SearchFragment extends Fragment {
 
@@ -41,6 +38,8 @@ public class SearchFragment extends Fragment {
         root = inflater.inflate(R.layout.fragment_search, container, false);
 
         viewModel = new ViewModelProvider(this).get(SearchViewModel.class);
+        checkIfSignedIn();
+        viewModel.init();
         initViews();
 
         recyclerView = root.findViewById(R.id.rv_search);
@@ -48,6 +47,7 @@ public class SearchFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
         bookAdapter = new BookAdapter();
+        bookAdapter.setViewModel(viewModel);
         recyclerView.setAdapter(bookAdapter);
 
         viewModel.getSearchResult().observe(this.getViewLifecycleOwner(), booksResult -> {
@@ -87,5 +87,15 @@ public class SearchFragment extends Fragment {
             progressBar.setVisibility(View.INVISIBLE);
             loading.setVisibility(View.INVISIBLE);
         }
+    }
+
+    private void checkIfSignedIn() {
+        if (viewModel.getCurrentUser().getValue() == null) {
+            startLoginActivity();
+        }
+    }
+
+    private void startLoginActivity() {
+        startActivity(new Intent(this.getContext(), SignInActivity.class));
     }
 }

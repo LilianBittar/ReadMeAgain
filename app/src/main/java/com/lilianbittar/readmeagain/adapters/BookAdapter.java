@@ -4,19 +4,25 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.lilianbittar.readmeagain.R;
 import com.lilianbittar.readmeagain.model.Book;
+import com.lilianbittar.readmeagain.viewmodels.SearchViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHandler> {
 
+    private SearchViewModel viewModel;
     private List<Book> books;
     private OnClickListener listener;
 
@@ -32,8 +38,13 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHandler> {
         return new ViewHandler(view);
     }
 
+    public void setViewModel(SearchViewModel viewModel) {
+        this.viewModel = viewModel;
+    }
+
     @Override
     public void onBindViewHolder(@NonNull ViewHandler holder, int position) {
+        holder.position = holder.getAdapterPosition();
         String coverId = books.get(position).getCoverId();
         if (coverId.isEmpty()) {
             coverId = "https://user-images.githubusercontent.com/24848110/33519396-7e56363c-d79d-11e7-969b-09782f5ccbab.png";
@@ -86,11 +97,13 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHandler> {
     public class ViewHandler extends RecyclerView.ViewHolder {
 
         private final ImageView imageView;
+        int position;
         private TextView bookTitle;
         private TextView bookAuthor;
         private TextView bookGenre;
         private TextView bookISBN;
         private Context context;
+        private Button addToRead;
 
         public ViewHandler(@NonNull View itemView) {
             super(itemView);
@@ -100,6 +113,11 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHandler> {
             bookAuthor = itemView.findViewById(R.id.book_author);
             bookGenre = itemView.findViewById(R.id.book_genre);
             bookISBN = itemView.findViewById(R.id.book_isbn);
+            addToRead = itemView.findViewById(R.id.button_add_to_read);
+            addToRead.setOnClickListener(view -> {
+                viewModel.addBookToRead(books.get(position));
+                Toast.makeText(this.context, "added book " + books.get(position).getTitle() + " to read", Toast.LENGTH_LONG).show();
+            });
         }
     }
 

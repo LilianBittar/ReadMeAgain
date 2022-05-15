@@ -17,6 +17,8 @@ import android.view.MenuItem;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.lilianbittar.readmeagain.R;
+import com.lilianbittar.readmeagain.repositories.BookRepo;
+import com.lilianbittar.readmeagain.repositories.UserRepository;
 import com.lilianbittar.readmeagain.viewmodels.MainViewModel;
 
 public class MainActivity extends AppCompatActivity {
@@ -33,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         viewModel = new ViewModelProvider(this).get(MainViewModel.class);
         checkIfSignedIn();
 
@@ -95,12 +98,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void checkIfSignedIn() {
-        viewModel.getCurrentUser().observe(this, user -> {
-            if (user != null) {
-                String message = "Welcome " + user.getDisplayName();
-            } else
-                startLoginActivity();
-        });
+        if (viewModel.getCurrentUser().getValue() == null) {
+            startLoginActivity();
+        }
     }
 
     private void startLoginActivity() {

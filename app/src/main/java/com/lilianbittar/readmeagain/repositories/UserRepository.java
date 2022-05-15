@@ -7,9 +7,9 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class UserRepository {
 
-    private final UserLiveData currentUser;
-    private final Application app;
     private static UserRepository instance;
+    private final Application app;
+    private final UserLiveData currentUser;
 
     private UserRepository(Application app) {
         this.app = app;
@@ -17,7 +17,9 @@ public class UserRepository {
     }
 
     public static synchronized UserRepository getInstance(Application app) {
-        if (instance == null) instance = new UserRepository(app);
+        if (instance == null) {
+            instance = new UserRepository(app);
+        }
         return instance;
     }
 
