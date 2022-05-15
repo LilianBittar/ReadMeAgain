@@ -3,39 +3,30 @@ package com.lilianbittar.readmeagain.adapters;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
-
+import androidx.lifecycle.Lifecycle;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
 import java.util.ArrayList;
 
-public class ProfileAdapter extends FragmentPagerAdapter {
+public class ProfileAdapter extends FragmentStateAdapter {
 
-    private final ArrayList<Fragment> fragmentArrayList = new ArrayList<>();
-    private final ArrayList<String> fragmentTitle = new ArrayList<>();
+    private ArrayList<Fragment> fragmentList = new ArrayList<>();
 
-
-    public ProfileAdapter(@NonNull FragmentManager fm, int behavior) {
-        super(fm, behavior);
+    public ProfileAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
+        super(fragmentManager, lifecycle);
     }
 
     @NonNull
     @Override
-    public Fragment getItem(int position) {
-        return fragmentArrayList.get(position);
+    public Fragment createFragment(int position) {
+        return fragmentList.get(position);
+    }
+
+    public void addFragment(Fragment fragment) {
+        fragmentList.add(fragment);
     }
 
     @Override
-    public int getCount() {
-        return fragmentArrayList.size();
-    }
-
-    public void addFragment(Fragment fragment, String title){
-        fragmentArrayList.add(fragment);
-        fragmentTitle.add(title);
-    }
-
-    @NonNull
-    @Override
-    public CharSequence getPageTitle(int position){
-        return fragmentTitle.get(position);
+    public int getItemCount() {
+        return fragmentList.size();
     }
 }
