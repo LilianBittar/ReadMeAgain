@@ -1,9 +1,17 @@
 package com.lilianbittar.readmeagain.repositories;
 
+import android.app.Application;
 import android.util.Log;
+
+import androidx.lifecycle.LiveData;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.lilianbittar.readmeagain.dao.BookDatabase;
+import com.lilianbittar.readmeagain.dao.BookToRead;
+import com.lilianbittar.readmeagain.dao.BooksToReadDao;
+import com.lilianbittar.readmeagain.dao.ReadBook;
+import com.lilianbittar.readmeagain.dao.ReadBooksDao;
 import com.lilianbittar.readmeagain.model.Book;
 import com.lilianbittar.readmeagain.model.BookList;
 import com.lilianbittar.readmeagain.network.BookApi;
@@ -23,11 +31,23 @@ public class BookRepo {
     private DatabaseReference myRef;
     private BookListLiveData booksToRead;
 
-    private BookRepo() {}
+    private final BooksToReadDao booksToReadDao;
+    private final ReadBooksDao readBooksDao;
 
-    public static synchronized BookRepo getInstance() {
+    private final LiveData<List<BookToRead>> allBooksToRead;
+    private final LiveData<List<ReadBook>> allReadBooks;
+
+    private BookRepo(Application app) {
+        BookDatabase database = BookDatabase.getInstance(app);
+        booksToReadDao = database.booksToReadDao();
+        readBooksDao = database.readBooksDao();
+        allBooksToRead = booksToReadDao.getAllToReadBooks();
+        allReadBooks = readBooksDao.getAllReadBooks();
+    }
+
+    public static synchronized BookRepo getInstance(Application app) {
         if (instance == null) {
-            instance = new BookRepo();
+            instance = new BookRepo(app);
         }
         return instance;
     }
