@@ -15,9 +15,9 @@ public class ReadBook {
     private String author;
     private String subject;
     private String coverId;
-    private Date readDate;
+    private String readDate;
 
-    public ReadBook(String title, Long number_of_pages_median, String isbn, String author, String subject, String coverId, Date readDate) {
+    public ReadBook(String title, Long number_of_pages_median, String isbn, String author, String subject, String coverId, String readDate) {
         this.title = title;
         this.number_of_pages_median = number_of_pages_median;
         this.isbn = isbn;
@@ -25,6 +25,14 @@ public class ReadBook {
         this.subject = subject;
         this.coverId = coverId;
         this.readDate = readDate;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -75,11 +83,11 @@ public class ReadBook {
         this.coverId = coverId;
     }
 
-    public Date getReadDate() {
+    public String getReadDate() {
         return readDate;
     }
 
-    public void setReadDate(Date readDate) {
+    public void setReadDate(String readDate) {
         this.readDate = readDate;
     }
 }

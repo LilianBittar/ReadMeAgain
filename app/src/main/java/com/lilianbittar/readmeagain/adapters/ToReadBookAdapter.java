@@ -26,7 +26,8 @@ public class ToReadBookAdapter extends RecyclerView.Adapter<ToReadBookAdapter.Vi
     private ProfileViewModel viewModel;
     private List<BookToRead> ToReadBookList;
 
-    public ToReadBookAdapter() { this.ToReadBookList = new ArrayList<>();
+    public ToReadBookAdapter() {
+        this.ToReadBookList = new ArrayList<>();
     }
 
     @NonNull
@@ -88,7 +89,7 @@ public class ToReadBookAdapter extends RecyclerView.Adapter<ToReadBookAdapter.Vi
     }
 
     public void clearBookList() {
-        this.ToReadBookList.clear();
+       // this.ToReadBookList.clear();
     }
 
 public class ViewHandler extends RecyclerView.ViewHolder {

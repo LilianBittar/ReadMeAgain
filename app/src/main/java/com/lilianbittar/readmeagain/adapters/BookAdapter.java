@@ -24,7 +24,6 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHandler> {
 
     private SearchViewModel viewModel;
     private List<Book> books;
-    private OnClickListener listener;
 
     public BookAdapter() {
         this.books = new ArrayList<>();
@@ -34,7 +33,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHandler> {
     @Override
     public ViewHandler onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.fragment_book_items, parent, false);
+        View view = inflater.inflate(R.layout.fragment_book_items_toread, parent, false);
         return new ViewHandler(view);
     }
 
@@ -83,15 +82,10 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHandler> {
     public void updateBookList(final List<Book> bookList) {
         clearBookList();
         this.books = bookList;
-        notifyDataSetChanged();
     }
 
     public void clearBookList() {
         this.books.clear();
-    }
-
-    public void setListener(OnClickListener listener){
-        this.listener = listener;
     }
 
     public class ViewHandler extends RecyclerView.ViewHolder {
@@ -116,12 +110,9 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHandler> {
             addToRead = itemView.findViewById(R.id.button_add_to_read);
             addToRead.setOnClickListener(view -> {
                 viewModel.addBookToRead(books.get(position));
-                Toast.makeText(this.context, "added book " + books.get(position).getTitle() + " to read", Toast.LENGTH_LONG).show();
+
+                Toast.makeText(this.context, "added book ", Toast.LENGTH_LONG).show();
             });
         }
-    }
-
-    public interface OnClickListener {
-        void onClick(Book book);
     }
 }

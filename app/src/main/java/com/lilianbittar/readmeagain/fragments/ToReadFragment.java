@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.lilianbittar.readmeagain.R;
 import com.lilianbittar.readmeagain.adapters.BookAdapter;
+import com.lilianbittar.readmeagain.adapters.ToReadBookAdapter;
 import com.lilianbittar.readmeagain.viewmodels.ProfileViewModel;
 import com.lilianbittar.readmeagain.viewmodels.SearchViewModel;
 
@@ -22,7 +23,7 @@ public class ToReadFragment extends Fragment {
 
     private View root;
     private RecyclerView recyclerView;
-    private BookAdapter toReadBookAdapter;
+    private ToReadBookAdapter toReadBookAdapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_book_toread, container, false);
@@ -33,12 +34,12 @@ public class ToReadFragment extends Fragment {
         recyclerView.hasFixedSize();
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
-        toReadBookAdapter = new BookAdapter();
+        toReadBookAdapter = new ToReadBookAdapter();
         recyclerView.setAdapter(toReadBookAdapter);
-        toReadBookAdapter.updateBookList(viewModel.getToReadBooks().getValue().getBookList());
+        toReadBookAdapter.updateBookList(viewModel.getToReadBooks().getValue());
 
         viewModel.getToReadBooks().observe(this.getViewLifecycleOwner(), bookList -> {
-            toReadBookAdapter.updateBookList(bookList.getBookList());
+            toReadBookAdapter.updateBookList(bookList);
         });
 
         return root;

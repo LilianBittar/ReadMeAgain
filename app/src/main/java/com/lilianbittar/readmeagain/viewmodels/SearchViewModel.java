@@ -5,6 +5,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import com.google.firebase.auth.FirebaseUser;
+import com.lilianbittar.readmeagain.dao.BookToRead;
 import com.lilianbittar.readmeagain.model.Book;
 import com.lilianbittar.readmeagain.repositories.BookRepo;
 import com.lilianbittar.readmeagain.repositories.UserRepository;
@@ -21,7 +22,7 @@ public class SearchViewModel extends AndroidViewModel {
     public SearchViewModel(Application app) {
         super(app);
         userRepository = UserRepository.getInstance(app);
-        bookRepo = BookRepo.getInstance();
+        bookRepo = BookRepo.getInstance(app);
         searchResult = new MutableLiveData<>();
         loading = new MutableLiveData<>(false);
     }
@@ -52,6 +53,14 @@ public class SearchViewModel extends AndroidViewModel {
     }
 
     public void addBookToRead(Book bookToRead) {
-        bookRepo.addBookToRead(bookToRead);
+        BookToRead tmp = new BookToRead(
+                bookToRead.getTitle(),
+                bookToRead.getNumber_of_pages_median(),
+                bookToRead.getIsbns().get(0),
+                bookToRead.getAuthor().get(0),
+                bookToRead.getSubjects().get(0),
+                bookToRead.getCoverId()
+        );
+        bookRepo.insert(tmp);
     }
 }

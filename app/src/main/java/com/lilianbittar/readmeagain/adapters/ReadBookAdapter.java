@@ -63,7 +63,7 @@ public class ReadBookAdapter extends RecyclerView.Adapter<ReadBookAdapter.ViewHa
         }
         holder.bookGenre.setText(subject);
 
-        Date date = new Date();
+        String date = new Date().toString();
         if (readBookList.get(position).getReadDate() != null) {
             date = readBookList.get(position).getReadDate();
         }

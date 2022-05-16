@@ -2,25 +2,22 @@ package com.lilianbittar.readmeagain.repositories;
 
 import android.app.Application;
 import android.util.Log;
-
 import androidx.lifecycle.LiveData;
-
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.lilianbittar.readmeagain.dao.BookDatabase;
 import com.lilianbittar.readmeagain.dao.BookToRead;
 import com.lilianbittar.readmeagain.dao.BooksToReadDao;
 import com.lilianbittar.readmeagain.dao.ReadBook;
 import com.lilianbittar.readmeagain.dao.ReadBooksDao;
 import com.lilianbittar.readmeagain.model.Book;
-import com.lilianbittar.readmeagain.model.BookList;
 import com.lilianbittar.readmeagain.network.BookApi;
 import com.lilianbittar.readmeagain.network.CallbackLoading;
 import com.lilianbittar.readmeagain.network.ServiceGenerator;
 import com.lilianbittar.readmeagain.network.responses.SearchBookByTitleResponse;
-
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -37,12 +34,16 @@ public class BookRepo {
     private final LiveData<List<BookToRead>> allBooksToRead;
     private final LiveData<List<ReadBook>> allReadBooks;
 
+    private final ExecutorService executorService;
+
+
     private BookRepo(Application app) {
         BookDatabase database = BookDatabase.getInstance(app);
         booksToReadDao = database.booksToReadDao();
         readBooksDao = database.readBooksDao();
         allBooksToRead = booksToReadDao.getAllToReadBooks();
         allReadBooks = readBooksDao.getAllReadBooks();
+        executorService = Executors.newFixedThreadPool(2);
     }
 
     public static synchronized BookRepo getInstance(Application app) {
@@ -53,25 +54,41 @@ public class BookRepo {
     }
 
     public void init(String userId) {
-        myRef = FirebaseDatabase.getInstance().getReference().child(userId).child("ToReadBooks");
-        booksToRead = new BookListLiveData(myRef);
+        //myRef = FirebaseDatabase.getInstance().getReference().child(userId).child("ToReadBooks");
+        //booksToRead = new BookListLiveData(myRef);
     }
 
-    public void addBookToRead(Book book) {
-        ArrayList<Book> tmp;
-        if (booksToRead.getValue() == null) {
-            tmp = new ArrayList<>();
-        } else {
-            tmp = booksToRead.getValue().getBookList();
-        }
-        tmp.add(book);
-        myRef.setValue(new BookList(tmp));
-
+    public LiveData<List<BookToRead>> getAllBooksToRead() {
+        return allBooksToRead;
     }
 
-    public BookListLiveData getBooks() {
-        return booksToRead;
+    public void insert(BookToRead bookToRead) {
+        executorService.execute(() -> booksToReadDao.insert(bookToRead));
     }
+
+    public LiveData<List<ReadBook>> getAllReadBooks() {
+        return allReadBooks;
+    }
+
+    public void insert(ReadBook readBook) {
+        executorService.execute(() -> readBooksDao.insert(readBook));
+    }
+
+//    public void addBookToRead(Book book) {
+//        ArrayList<Book> tmp;
+//        if (booksToRead.getValue() == null) {
+//            tmp = new ArrayList<>();
+//        } else {
+//            tmp = booksToRead.getValue().getBookList();
+//        }
+//        tmp.add(book);
+//        myRef.setValue(new BookList(tmp));
+//
+//    }
+
+//    public BookListLiveData getBooks() {
+//        return booksToRead;
+//    }
 
     public void searchForBook(String bookName, CallbackLoading callback){
         BookApi searchApi = ServiceGenerator.getBookApi();
