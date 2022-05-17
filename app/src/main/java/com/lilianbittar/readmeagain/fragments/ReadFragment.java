@@ -1,5 +1,6 @@
 package com.lilianbittar.readmeagain.fragments;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -28,6 +29,7 @@ public class ReadFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_book_read, container, false);
         viewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
+        viewModel.init();
         initViews();
 
         recyclerView.setHasFixedSize(true);
@@ -42,11 +44,12 @@ public class ReadFragment extends Fragment {
             readBookAdapter.updateBookList(bookList);
         });
 
+
         return root;
     }
 
-    @Override
-    public void onResume() {
+
+    public void onResume(){
         super.onResume();
         root.requestLayout();
     }

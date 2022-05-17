@@ -26,7 +26,6 @@ public class SearchViewModel extends AndroidViewModel {
         loading = new MutableLiveData<>(false);
     }
 
-
     public LiveData<List<Book>> getSearchResult() {
         return searchResult;
     }

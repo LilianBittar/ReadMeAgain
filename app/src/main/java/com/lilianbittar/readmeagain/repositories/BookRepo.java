@@ -12,6 +12,7 @@ import com.lilianbittar.readmeagain.dao.ReadBook;
 import com.lilianbittar.readmeagain.dao.ReadBooksDao;
 import com.lilianbittar.readmeagain.model.Book;
 import com.lilianbittar.readmeagain.model.BookList;
+import com.lilianbittar.readmeagain.model.ExchangeBook;
 import com.lilianbittar.readmeagain.network.BookApi;
 import com.lilianbittar.readmeagain.network.CallbackLoading;
 import com.lilianbittar.readmeagain.network.ServiceGenerator;
@@ -28,13 +29,13 @@ public class BookRepo {
 
     private static BookRepo instance;
     private DatabaseReference myRef;
-    private BookListLiveData booksToRead;
+    private BookListLiveData booksToExchange;
 
     private final BooksToReadDao booksToReadDao;
     private final ReadBooksDao readBooksDao;
 
-    private LiveData<List<BookToRead>> allBooksToRead;
-    private LiveData<List<ReadBook>> allReadBooks;
+    private final LiveData<List<BookToRead>> allBooksToRead;
+    private final LiveData<List<ReadBook>> allReadBooks;
 
     private final ExecutorService executorService;
 
@@ -54,10 +55,13 @@ public class BookRepo {
         return instance;
     }
 
-
-
     public LiveData<List<BookToRead>> getAllBooksToRead() {
         return allBooksToRead;
+    }
+
+    public void init() {
+        myRef = FirebaseDatabase.getInstance().getReference().child("ExchangeBooks");
+        booksToExchange = new BookListLiveData(myRef);
     }
 
     public void insert(BookToRead bookToRead) {
@@ -72,6 +76,12 @@ public class BookRepo {
         });
     }
 
+    public void delete(ReadBook readBook) {
+        executorService.execute(() -> {
+            readBooksDao.delete(readBook);
+        });
+    }
+
     public LiveData<List<ReadBook>> getAllReadBooks() {
         return allReadBooks;
     }
@@ -81,19 +91,19 @@ public class BookRepo {
     }
 
     public void addBookToExchange(ReadBook book) {
-        ArrayList<ReadBook> tmp;
-        if (booksToRead.getValue() == null) {
+        ArrayList<ExchangeBook> tmp;
+        if (booksToExchange.getValue() == null) {
             tmp = new ArrayList<>();
         } else {
-            tmp = booksToRead.getValue().getBookList();
+            tmp = booksToExchange.getValue().getBookList();
         }
-        tmp.add(book);
+        tmp.add(new ExchangeBook(book.getId(), book.getTitle(), book.getNumber_of_pages_median(), book.getIsbn(), book.getAuthor(),book.getSubject(), book.getCoverId(), book.getReadDate()));
         myRef.setValue(new BookList(tmp));
-
+        Log.i("gh", "added");
     }
 
-    public BookListLiveData getBooks() {
-        return booksToRead;
+    public BookListLiveData getBooksToExchange() {
+        return booksToExchange;
     }
 
     public void searchForBook(String bookName, CallbackLoading callback){

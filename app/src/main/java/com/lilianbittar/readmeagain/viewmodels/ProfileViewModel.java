@@ -9,6 +9,8 @@ import androidx.lifecycle.LiveData;
 import com.lilianbittar.readmeagain.dao.BookToRead;
 import com.lilianbittar.readmeagain.dao.ReadBook;
 import com.lilianbittar.readmeagain.repositories.BookRepo;
+import com.lilianbittar.readmeagain.repositories.UserRepository;
+
 import java.util.Date;
 import java.util.List;
 
@@ -19,6 +21,10 @@ public class ProfileViewModel extends AndroidViewModel {
     public ProfileViewModel(Application app){
         super(app);
         bookRepo = BookRepo.getInstance(app);
+    }
+
+    public void init() {
+        bookRepo.init();
     }
 
     public LiveData<List<BookToRead>> getToReadBooks() {
@@ -45,6 +51,7 @@ public class ProfileViewModel extends AndroidViewModel {
     }
 
     public void markBookAsExchange(ReadBook readBook) {
-
+       bookRepo.addBookToExchange(readBook);
+       bookRepo.delete(readBook);
     }
 }

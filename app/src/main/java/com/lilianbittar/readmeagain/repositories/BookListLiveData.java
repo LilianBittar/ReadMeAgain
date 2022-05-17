@@ -1,5 +1,7 @@
 package com.lilianbittar.readmeagain.repositories;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import com.google.firebase.database.DataSnapshot;
@@ -26,8 +28,10 @@ public class BookListLiveData extends LiveData<BookList> {
 
     public BookListLiveData(DatabaseReference ref) {
         databaseReference = ref;
+        Log.i("gh", "started fetching");
         ref.get().addOnCompleteListener(d -> {
             setValue(d.getResult().getValue(BookList.class));
+            Log.i("gh", getValue().getBookList().toString());
         });
     }
 

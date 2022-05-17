@@ -19,6 +19,7 @@ public class ToReadFragment extends Fragment {
 
     private View root;
     private RecyclerView recyclerView;
+    private RecyclerView secondaryRV;
     private ToReadBookAdapter toReadBookAdapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -29,6 +30,7 @@ public class ToReadFragment extends Fragment {
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
+
 
         toReadBookAdapter = new ToReadBookAdapter(viewModel);
 
@@ -47,6 +49,7 @@ public class ToReadFragment extends Fragment {
         super.onResume();
         root.requestLayout();
     }
+
 
     private void initViews() {
         recyclerView = root.findViewById(R.id.rc_books_toread);

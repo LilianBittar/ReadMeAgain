@@ -79,12 +79,11 @@ public class ReadBookAdapter extends RecyclerView.Adapter<ReadBookAdapter.ViewHa
     }
 
     public void updateBookList(List<ReadBook> bookList) {
-        if (bookList != null) {
+        if (bookList != null && !bookList.isEmpty()) {
             Log.i("gh", bookList.toString());
-            readBookList.clear();
-            this.readBookList.addAll(bookList);
+            this.readBookList = bookList;
+            notifyDataSetChanged();
         }
-        notifyDataSetChanged();
     }
 
     public class ViewHandler extends RecyclerView.ViewHolder {
@@ -108,7 +107,7 @@ public class ReadBookAdapter extends RecyclerView.Adapter<ReadBookAdapter.ViewHa
             bookDate = itemView.findViewById(R.id.book_date);
             addToExchange = itemView.findViewById(R.id.button_add_to_exchange);
             addToExchange.setOnClickListener(view -> {
-//                viewModel.addBookToRead(books.get(position));
+              viewModel.markBookAsExchange(readBookList.get(position));
                 Toast.makeText(this.context, "added book " + readBookList.get(position).getTitle() + " to exchange", Toast.LENGTH_LONG).show();
             });
         }

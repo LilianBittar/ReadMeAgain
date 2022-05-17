@@ -5,21 +5,21 @@ import java.util.ArrayList;
 
 public class BookList {
 
-    private ArrayList<ReadBook> bookList;
+    private ArrayList<ExchangeBook> bookList;
 
     public BookList() {
         this.bookList = new ArrayList<>();
     }
 
-    public BookList(ArrayList<ReadBook> bookList) {
+    public BookList(ArrayList<ExchangeBook> bookList) {
         setBookList(bookList);
     }
 
-    public void setBookList(ArrayList<ReadBook> bookList) {
+    public void setBookList(ArrayList<ExchangeBook> bookList) {
         this.bookList = bookList;
     }
 
-    public ArrayList<ReadBook> getBookList() {
+    public ArrayList<ExchangeBook> getBookList() {
         return this.bookList;
     }
 }
