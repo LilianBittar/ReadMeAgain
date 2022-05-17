@@ -27,7 +27,8 @@
         <entry key="..\:/repos/ReadMeAgain/app/src/main/res/layout/fragment_signin.xml" value="0.365625" />
         <entry key="..\:/repos/ReadMeAgain/app/src/main/res/layout/nav_drawer_header.xml" value="0.25" />
         <entry key="..\:/repos/ReadMeAgain/app/src/main/res/layout/navigation_drawer_header.xml" value="0.575" />
-        <entry key="..\:/repos/ReadMeAgain/app/src/main/res/layout/rc_item_book_read.xml" value="0.575" />
+        <entry key="..\:/repos/ReadMeAgain/app/src/main/res/layout/rc_item_book.xml" value="0.37083333333333335" />
+        <entry key="..\:/repos/ReadMeAgain/app/src/main/res/layout/rc_item_book_read.xml" value="0.33" />
         <entry key="..\:/repos/ReadMeAgain/app/src/main/res/layout/rc_item_book_toexchange.xml" value="0.3609375" />
         <entry key="..\:/repos/ReadMeAgain/app/src/main/res/layout/rc_item_book_toread.xml" value="0.575" />
         <entry key="..\:/repos/ReadMeAgain/app/src/main/res/menu/activity_main_drawer.xml" value="0.24444444444444444" />

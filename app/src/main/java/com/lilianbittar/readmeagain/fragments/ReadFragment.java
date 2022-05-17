@@ -1,6 +1,7 @@
 package com.lilianbittar.readmeagain.fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +39,7 @@ public class ReadFragment extends Fragment {
         readBookAdapter.updateBookList(viewModel.getReadBooks().getValue());
 
         viewModel.getReadBooks().observe(this.getViewLifecycleOwner(), bookList -> {
+            Log.i("gh", bookList.toString());
             readBookAdapter.updateBookList(bookList);
         });
 

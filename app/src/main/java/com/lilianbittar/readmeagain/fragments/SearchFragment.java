@@ -47,7 +47,10 @@ public class SearchFragment extends Fragment {
         searchAdapter = new SearchAdapter(viewModel);
         recyclerView.setAdapter(searchAdapter);
 
-        viewModel.getSearchResult().observe(this.getViewLifecycleOwner(), booksResult -> searchAdapter.updateBookList(booksResult));
+        viewModel.getSearchResult().observe(this.getViewLifecycleOwner(), booksResult -> {
+            searchLogo.setVisibility(booksResult != null && !booksResult.isEmpty() ? View.INVISIBLE : View.VISIBLE);
+            searchAdapter.updateBookList(booksResult);
+        });
 
         searchButton.setOnClickListener(v -> {
             String input = searchInput.getEditText().getText().toString();
@@ -80,8 +83,7 @@ public class SearchFragment extends Fragment {
         if (isLoading) {
             progressBar.setVisibility(View.VISIBLE);
             loading.setVisibility(View.VISIBLE);
-        }
-        else {
+        } else {
             progressBar.setVisibility(View.INVISIBLE);
             loading.setVisibility(View.INVISIBLE);
         }

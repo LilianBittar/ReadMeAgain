@@ -77,8 +77,8 @@ public class BookRepo {
         executorService.execute(() -> readBooksDao.insert(readBook));
     }
 
-    public void addBookToRead(Book book) {
-        ArrayList<Book> tmp;
+    public void addBookToExchange(ReadBook book) {
+        ArrayList<ReadBook> tmp;
         if (booksToRead.getValue() == null) {
             tmp = new ArrayList<>();
         } else {

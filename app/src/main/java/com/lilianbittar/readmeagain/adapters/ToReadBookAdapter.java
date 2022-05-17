@@ -33,7 +33,7 @@ public class ToReadBookAdapter extends RecyclerView.Adapter<ToReadBookAdapter.Vi
     @Override
     public ViewHandler onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.rc_item_book_toread, parent, false);
+        View view = inflater.inflate(R.layout.rc_item_book, parent, false);
         return new ToReadBookAdapter.ViewHandler(view);
     }
 

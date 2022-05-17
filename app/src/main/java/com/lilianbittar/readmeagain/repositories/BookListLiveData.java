@@ -6,6 +6,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
+import com.lilianbittar.readmeagain.dao.ReadBook;
 import com.lilianbittar.readmeagain.model.BookList;
 
 public class BookListLiveData extends LiveData<BookList> {

@@ -1,6 +1,7 @@
 package com.lilianbittar.readmeagain.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -77,11 +78,13 @@ public class ReadBookAdapter extends RecyclerView.Adapter<ReadBookAdapter.ViewHa
         return 0;
     }
 
-    public void updateBookList(final List<ReadBook> bookList) {
+    public void updateBookList(List<ReadBook> bookList) {
         if (bookList != null) {
-            this.readBookList = bookList;
-            notifyDataSetChanged();
+            Log.i("gh", bookList.toString());
+            readBookList.clear();
+            this.readBookList.addAll(bookList);
         }
+        notifyDataSetChanged();
     }
 
     public class ViewHandler extends RecyclerView.ViewHolder {

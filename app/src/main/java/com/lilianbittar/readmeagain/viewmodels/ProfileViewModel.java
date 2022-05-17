@@ -43,4 +43,8 @@ public class ProfileViewModel extends AndroidViewModel {
         bookRepo.insert(tmp);
         bookRepo.delete(bookToRead);
     }
+
+    public void markBookAsExchange(ReadBook readBook) {
+
+    }
 }
