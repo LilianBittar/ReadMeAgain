@@ -1,7 +1,6 @@
 package com.lilianbittar.readmeagain.fragments;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +27,7 @@ public class ToReadFragment extends Fragment {
         viewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
         initViews();
 
-        recyclerView.hasFixedSize();
+        recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
         toReadBookAdapter = new ToReadBookAdapter(viewModel);
@@ -41,6 +40,12 @@ public class ToReadFragment extends Fragment {
         });
 
         return root;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        root.requestLayout();
     }
 
     private void initViews() {

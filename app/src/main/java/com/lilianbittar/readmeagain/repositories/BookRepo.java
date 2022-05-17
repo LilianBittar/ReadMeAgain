@@ -4,6 +4,7 @@ import android.app.Application;
 import android.util.Log;
 import androidx.lifecycle.LiveData;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.lilianbittar.readmeagain.dao.BookDatabase;
 import com.lilianbittar.readmeagain.dao.BookToRead;
 import com.lilianbittar.readmeagain.dao.BooksToReadDao;
@@ -52,6 +53,8 @@ public class BookRepo {
         }
         return instance;
     }
+
+
 
     public LiveData<List<BookToRead>> getAllBooksToRead() {
         return allBooksToRead;

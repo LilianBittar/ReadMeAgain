@@ -30,7 +30,7 @@ public class ReadFragment extends Fragment {
         viewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
         initViews();
 
-        recyclerView.hasFixedSize();
+        recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
         readBookAdapter = new ReadBookAdapter(viewModel);
@@ -39,11 +39,16 @@ public class ReadFragment extends Fragment {
         readBookAdapter.updateBookList(viewModel.getReadBooks().getValue());
 
         viewModel.getReadBooks().observe(this.getViewLifecycleOwner(), bookList -> {
-            Log.i("gh", bookList.toString());
             readBookAdapter.updateBookList(bookList);
         });
 
         return root;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        root.requestLayout();
     }
 
     private void initViews() {
