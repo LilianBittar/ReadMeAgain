@@ -40,9 +40,8 @@ public class SignInActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         viewModel = new ViewModelProvider(this).get(SignInViewModel.class);
-        viewModel.getCurrentUser().observe(this, user -> {
-            if (user != null) goToMainActivity();
-        });
+        checkIfSignedIn();
+
         setContentView(R.layout.activity_sign_in);
         initViews();
 
@@ -111,6 +110,13 @@ public class SignInActivity extends AppCompatActivity {
         loginButton = findViewById(R.id.frag_sign_in_button_login);
         alternativeSignInButton = findViewById(R.id.sign_in_button_alternative_login);
         registerText = findViewById(R.id.sign_in_text_register);
+    }
+
+    private void checkIfSignedIn() {
+        viewModel.getCurrentUser().observe(this, user -> {
+            if (user != null)
+                goToMainActivity();
+        });
     }
 
     private void goToMainActivity() {

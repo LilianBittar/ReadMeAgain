@@ -15,9 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.lilianbittar.readmeagain.R;
 import com.lilianbittar.readmeagain.dao.ReadBook;
-import com.lilianbittar.readmeagain.model.Book;
 import com.lilianbittar.readmeagain.viewmodels.ProfileViewModel;
-import com.lilianbittar.readmeagain.viewmodels.SearchViewModel;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -28,20 +26,22 @@ public class ReadBookAdapter extends RecyclerView.Adapter<ReadBookAdapter.ViewHa
     private ProfileViewModel viewModel;
     private List<ReadBook> readBookList;
 
-    public ReadBookAdapter() { this.readBookList = new ArrayList<>();
+    public ReadBookAdapter(ProfileViewModel viewModel) {
+        this.viewModel = viewModel;
+        this.readBookList = new ArrayList<>();
     }
 
     @NonNull
     @Override
-    public ReadBookAdapter.ViewHandler onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHandler onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.fragment_book_items_read, parent, false);
+        View view = inflater.inflate(R.layout.rc_item_book_read, parent, false);
         return new ReadBookAdapter.ViewHandler(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHandler holder, int position) {
-        holder.position = holder.getAdapterPosition();
+        holder.position = holder.getBindingAdapterPosition();
         String coverId = readBookList.get(position).getCoverId();
         if (coverId.isEmpty()) {
             coverId = "https://user-images.githubusercontent.com/24848110/33519396-7e56363c-d79d-11e7-969b-09782f5ccbab.png";
@@ -70,12 +70,6 @@ public class ReadBookAdapter extends RecyclerView.Adapter<ReadBookAdapter.ViewHa
         holder.bookDate.setText(date.toString());
     }
 
-    public void setViewModel(ProfileViewModel viewModel) {
-        this.viewModel = viewModel;
-    }
-
-
-
     @Override
     public int getItemCount() {
         if (readBookList != null)
@@ -84,25 +78,22 @@ public class ReadBookAdapter extends RecyclerView.Adapter<ReadBookAdapter.ViewHa
     }
 
     public void updateBookList(final List<ReadBook> bookList) {
-        clearBookList();
-        this.readBookList = bookList;
-        notifyDataSetChanged();
-    }
-
-    public void clearBookList() {
-        this.readBookList.clear();
+        if (bookList != null) {
+            this.readBookList = bookList;
+            notifyDataSetChanged();
+        }
     }
 
     public class ViewHandler extends RecyclerView.ViewHolder {
 
-        private final ImageView imageView;
         int position;
-        private TextView bookTitle;
-        private TextView bookAuthor;
-        private TextView bookGenre;
-        private TextView bookDate;
-        private Context context;
-        private Button addToExchange;
+        private final ImageView imageView;
+        private final TextView bookTitle;
+        private final TextView bookAuthor;
+        private final TextView bookGenre;
+        private final TextView bookDate;
+        private final Context context;
+        private final Button addToExchange;
 
         public ViewHandler(@NonNull View itemView) {
             super(itemView);

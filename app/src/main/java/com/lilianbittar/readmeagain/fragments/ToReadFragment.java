@@ -10,12 +10,9 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.lilianbittar.readmeagain.R;
-import com.lilianbittar.readmeagain.adapters.BookAdapter;
 import com.lilianbittar.readmeagain.adapters.ToReadBookAdapter;
 import com.lilianbittar.readmeagain.viewmodels.ProfileViewModel;
-import com.lilianbittar.readmeagain.viewmodels.SearchViewModel;
 
 public class ToReadFragment extends Fragment {
 
@@ -34,7 +31,8 @@ public class ToReadFragment extends Fragment {
         recyclerView.hasFixedSize();
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
-        toReadBookAdapter = new ToReadBookAdapter();
+        toReadBookAdapter = new ToReadBookAdapter(viewModel);
+
         recyclerView.setAdapter(toReadBookAdapter);
         toReadBookAdapter.updateBookList(viewModel.getToReadBooks().getValue());
 
@@ -46,8 +44,6 @@ public class ToReadFragment extends Fragment {
     }
 
     private void initViews() {
-        recyclerView = root.findViewById(R.id.frag_book_toread);
+        recyclerView = root.findViewById(R.id.rc_books_toread);
     }
-
-
 }

@@ -1,43 +1,46 @@
 package com.lilianbittar.readmeagain.viewmodels;
 
 import android.app.Application;
+import android.icu.text.SimpleDateFormat;
+import android.os.Build;
+import androidx.annotation.RequiresApi;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-import com.google.firebase.auth.FirebaseUser;
 import com.lilianbittar.readmeagain.dao.BookToRead;
 import com.lilianbittar.readmeagain.dao.ReadBook;
-import com.lilianbittar.readmeagain.model.Book;
-import com.lilianbittar.readmeagain.model.BookList;
 import com.lilianbittar.readmeagain.repositories.BookRepo;
-import com.lilianbittar.readmeagain.repositories.UserRepository;
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class ProfileViewModel extends AndroidViewModel {
-    
-    private final UserRepository userRepository;
+
     private final BookRepo bookRepo;
 
     public ProfileViewModel(Application app){
         super(app);
-        userRepository = UserRepository.getInstance(app);
         bookRepo = BookRepo.getInstance(app);
-    }
-
-    public void init() {
-       // String userId = userRepository.getCurrentUser().getValue().getUid();
-       // bookRepo.init(userId);
-    }
-
-    public LiveData<FirebaseUser> getCurrentUser() {
-        return userRepository.getCurrentUser();
     }
 
     public LiveData<List<BookToRead>> getToReadBooks() {
         return bookRepo.getAllBooksToRead();
     }
 
-    public void signOut() {
-        userRepository.signOut();
+    public LiveData<List<ReadBook>> getReadBooks() {
+        return bookRepo.getAllReadBooks();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public void markBookAsRead(BookToRead bookToRead) {
+        ReadBook tmp = new ReadBook(
+                bookToRead.getTitle(),
+                bookToRead.getNumber_of_pages_median(),
+                bookToRead.getIsbn(),
+                bookToRead.getAuthor(),
+                bookToRead.getSubject(),
+                bookToRead.getCoverId(),
+                new SimpleDateFormat("yyyy-MM-dd").format(new Date())
+        );
+        bookRepo.insert(tmp);
+        bookRepo.delete(bookToRead);
     }
 }

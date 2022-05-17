@@ -5,6 +5,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
 import com.lilianbittar.readmeagain.dao.BookToRead;
 import com.lilianbittar.readmeagain.model.Book;
 import com.lilianbittar.readmeagain.repositories.BookRepo;
@@ -13,7 +14,6 @@ import java.util.List;
 
 public class SearchViewModel extends AndroidViewModel {
 
-    private final UserRepository userRepository;
     private final BookRepo bookRepo;
 
     private MutableLiveData<List<Book>> searchResult;
@@ -21,20 +21,11 @@ public class SearchViewModel extends AndroidViewModel {
 
     public SearchViewModel(Application app) {
         super(app);
-        userRepository = UserRepository.getInstance(app);
         bookRepo = BookRepo.getInstance(app);
         searchResult = new MutableLiveData<>();
         loading = new MutableLiveData<>(false);
     }
 
-    public void init() {
-        String userId = userRepository.getCurrentUser().getValue().getUid();
-        bookRepo.init(userId);
-    }
-
-    public LiveData<FirebaseUser> getCurrentUser() {
-        return userRepository.getCurrentUser();
-    }
 
     public LiveData<List<Book>> getSearchResult() {
         return searchResult;
@@ -53,12 +44,22 @@ public class SearchViewModel extends AndroidViewModel {
     }
 
     public void addBookToRead(Book bookToRead) {
+
+        String isbn = "Not found";
+        if (bookToRead.getIsbns() != null) isbn = bookToRead.getIsbns().get(0);
+
+        String author = "Not found";
+        if (bookToRead.getAuthor() != null) author = bookToRead.getAuthor().get(0);
+
+        String subject = "Not found";
+        if (bookToRead.getSubjects() != null) subject = bookToRead.getSubjects().get(0);
+
         BookToRead tmp = new BookToRead(
                 bookToRead.getTitle(),
                 bookToRead.getNumber_of_pages_median(),
-                bookToRead.getIsbns().get(0),
-                bookToRead.getAuthor().get(0),
-                bookToRead.getSubjects().get(0),
+                isbn,
+                author,
+                subject,
                 bookToRead.getCoverId()
         );
         bookRepo.insert(tmp);

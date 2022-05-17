@@ -8,24 +8,22 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.lilianbittar.readmeagain.R;
 import com.lilianbittar.readmeagain.model.Book;
 import com.lilianbittar.readmeagain.viewmodels.SearchViewModel;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHandler> {
+public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHandler> {
 
-    private SearchViewModel viewModel;
+    private final SearchViewModel viewModel;
     private List<Book> books;
 
-    public BookAdapter() {
+    public SearchAdapter(SearchViewModel viewModel) {
+        this.viewModel = viewModel;
         this.books = new ArrayList<>();
     }
 
@@ -33,17 +31,13 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHandler> {
     @Override
     public ViewHandler onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.fragment_book_items_toread, parent, false);
+        View view = inflater.inflate(R.layout.rc_item_book_toread, parent, false);
         return new ViewHandler(view);
-    }
-
-    public void setViewModel(SearchViewModel viewModel) {
-        this.viewModel = viewModel;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHandler holder, int position) {
-        holder.position = holder.getAdapterPosition();
+        holder.position = holder.getBindingAdapterPosition();
         String coverId = books.get(position).getCoverId();
         if (coverId.isEmpty()) {
             coverId = "https://user-images.githubusercontent.com/24848110/33519396-7e56363c-d79d-11e7-969b-09782f5ccbab.png";
@@ -80,23 +74,24 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHandler> {
     }
 
     public void updateBookList(final List<Book> bookList) {
-        clearBookList();
         this.books = bookList;
+        notifyDataSetChanged();
     }
 
     public void clearBookList() {
         this.books.clear();
+        notifyDataSetChanged();
     }
 
     public class ViewHandler extends RecyclerView.ViewHolder {
 
-        private final ImageView imageView;
         int position;
-        private TextView bookTitle;
-        private TextView bookAuthor;
-        private TextView bookGenre;
-        private TextView bookISBN;
-        private Context context;
+        private final ImageView imageView;
+        private final TextView bookTitle;
+        private final TextView bookAuthor;
+        private final TextView bookGenre;
+        private final TextView bookISBN;
+        private final Context context;
         private Button addToRead;
 
         public ViewHandler(@NonNull View itemView) {
@@ -110,8 +105,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHandler> {
             addToRead = itemView.findViewById(R.id.button_add_to_read);
             addToRead.setOnClickListener(view -> {
                 viewModel.addBookToRead(books.get(position));
-
-                Toast.makeText(this.context, "added book ", Toast.LENGTH_LONG).show();
+                Toast.makeText(this.context, "Book Added", Toast.LENGTH_LONG).show();
             });
         }
     }

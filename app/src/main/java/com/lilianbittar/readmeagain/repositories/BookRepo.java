@@ -10,6 +10,7 @@ import com.lilianbittar.readmeagain.dao.BooksToReadDao;
 import com.lilianbittar.readmeagain.dao.ReadBook;
 import com.lilianbittar.readmeagain.dao.ReadBooksDao;
 import com.lilianbittar.readmeagain.model.Book;
+import com.lilianbittar.readmeagain.model.BookList;
 import com.lilianbittar.readmeagain.network.BookApi;
 import com.lilianbittar.readmeagain.network.CallbackLoading;
 import com.lilianbittar.readmeagain.network.ServiceGenerator;
@@ -31,11 +32,10 @@ public class BookRepo {
     private final BooksToReadDao booksToReadDao;
     private final ReadBooksDao readBooksDao;
 
-    private final LiveData<List<BookToRead>> allBooksToRead;
-    private final LiveData<List<ReadBook>> allReadBooks;
+    private LiveData<List<BookToRead>> allBooksToRead;
+    private LiveData<List<ReadBook>> allReadBooks;
 
     private final ExecutorService executorService;
-
 
     private BookRepo(Application app) {
         BookDatabase database = BookDatabase.getInstance(app);
@@ -53,17 +53,20 @@ public class BookRepo {
         return instance;
     }
 
-    public void init(String userId) {
-        //myRef = FirebaseDatabase.getInstance().getReference().child(userId).child("ToReadBooks");
-        //booksToRead = new BookListLiveData(myRef);
-    }
-
     public LiveData<List<BookToRead>> getAllBooksToRead() {
         return allBooksToRead;
     }
 
     public void insert(BookToRead bookToRead) {
-        executorService.execute(() -> booksToReadDao.insert(bookToRead));
+        executorService.execute(() -> {
+            booksToReadDao.insert(bookToRead);
+        });
+    }
+
+    public void delete(BookToRead bookToRead) {
+        executorService.execute(() -> {
+            booksToReadDao.delete(bookToRead);
+        });
     }
 
     public LiveData<List<ReadBook>> getAllReadBooks() {
@@ -74,21 +77,21 @@ public class BookRepo {
         executorService.execute(() -> readBooksDao.insert(readBook));
     }
 
-//    public void addBookToRead(Book book) {
-//        ArrayList<Book> tmp;
-//        if (booksToRead.getValue() == null) {
-//            tmp = new ArrayList<>();
-//        } else {
-//            tmp = booksToRead.getValue().getBookList();
-//        }
-//        tmp.add(book);
-//        myRef.setValue(new BookList(tmp));
-//
-//    }
+    public void addBookToRead(Book book) {
+        ArrayList<Book> tmp;
+        if (booksToRead.getValue() == null) {
+            tmp = new ArrayList<>();
+        } else {
+            tmp = booksToRead.getValue().getBookList();
+        }
+        tmp.add(book);
+        myRef.setValue(new BookList(tmp));
 
-//    public BookListLiveData getBooks() {
-//        return booksToRead;
-//    }
+    }
+
+    public BookListLiveData getBooks() {
+        return booksToRead;
+    }
 
     public void searchForBook(String bookName, CallbackLoading callback){
         BookApi searchApi = ServiceGenerator.getBookApi();

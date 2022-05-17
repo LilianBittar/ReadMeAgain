@@ -72,4 +72,16 @@
         app:layout_constraintStart_toStartOf="@+id/rv_search"
         app:layout_constraintTop_toBottomOf="@+id/progressBar" />
 
+    <ImageView
+        android:id="@+id/frag_search_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="256dp"
+        android:alpha="0.5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.541"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/searching" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
