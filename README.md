@@ -1,6 +1,16 @@
 # ReadMeAgain
 Entering each semester a lot of books standing there without knowing the next user for them, in the same time many students need specific books to study with hoping to buy the books in an economical way. For those reasons here is a straightforward app that offers you as a student or as a reader to minimize the waste of the books, by exchange, sell books and search for a specific kind og books. This application is constructed as part of the Android Development course at VIA University College.
 
+# Architecture:
+<p align="center">
+    <img src="assets/login.png" alt="Preview">
+</p>
+
+# Application preview:
+<p align="center">
+    <img src="assets/app.png" alt="Preview">
+</p>
+
 # Requirements (MoSCoW Prioritization):
 ## Must have
 - [x] As a user I would like to be able to add a list of my own books that I would like to exchange so that other people can find them.

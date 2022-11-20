@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "487777297309",
+    "firebase_url": "https://readmeagain-2738c-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "readmeagain-2738c",
+    "storage_bucket": "readmeagain-2738c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:487777297309:android:c54c270e5aed44b670c574",
+        "android_client_info": {
+          "package_name": "com.lilianbittar.readmeagain"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "487777297309-fpdkfidq5cqq9n5na6qb2ostpd8pngkg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lilianbittar.readmeagain",
+            "certificate_hash": "9f89784921c6f0aed5b57cf6bbd027aade1f2496"
+          }
+        },
+        {
+          "client_id": "487777297309-e8s6n1fnf2t17hbeshg5e73j5f323p65.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7ZNybffNeA-p_fWdJ8r9WFcL5FQ0kZoo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "487777297309-e8s6n1fnf2t17hbeshg5e73j5f323p65.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
