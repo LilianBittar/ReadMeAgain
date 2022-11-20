@@ -3,12 +3,12 @@ Entering each semester a lot of books standing there without knowing the next us
 
 # Architecture:
 <p align="center">
-    <img src="assets/login.png" alt="Preview" width="200" height="400">
+    <img src="assets/login.png" alt="Preview" width="250" height="600">
 </p>
 
 # Application preview:
 <p align="center">
-    <img src="assets/app.png" alt="Preview" width="200" height="400">
+    <img src="assets/app.png" alt="Preview" width="250" height="600">
 </p>
 
 # Requirements (MoSCoW Prioritization):
